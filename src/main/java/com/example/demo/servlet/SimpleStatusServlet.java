@@ -1,5 +1,5 @@
 package com.example.demo.servlet;
 
-public class SimpleStatusSevrvlet {
+public class SimpleStatusServlet {
     
 }
