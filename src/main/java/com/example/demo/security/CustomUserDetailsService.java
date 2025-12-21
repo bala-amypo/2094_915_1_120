@@ -1,5 +1,32 @@
 package com.example.demo.security;
 
-public class CustomUserDetailsService {
-    
+import com.example.demo.entity.UserAccount;
+import com.example.demo.repository.UserAccountRepository;
+
+import org.springframework.security.core.userdetails.*;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import java.util.List;
+
+public class CustomUserDetailsService implements UserDetailsService {
+
+    private final UserAccountRepository userRepo;
+
+    public CustomUserDetailsService(UserAccountRepository userRepo) {
+        this.userRepo = userRepo;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) {
+
+        UserAccount user = userRepo.findByEmail(email)
+                .orElseThrow(() ->
+                        new UsernameNotFoundException("User not found"));
+
+        return new User(
+                user.getEmail(),
+                user.getPassword(),
+                List.of(new SimpleGrantedAuthority(user.getRole()))
+        );
+    }
 }
