@@ -9,7 +9,6 @@ public class RateLimitEnforcementDto {
     private Integer limitExceededBy;
     private String message;
 
-    // Standard Getters and Setters are required
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
