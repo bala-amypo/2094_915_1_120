@@ -1,6 +1,6 @@
 package com.example.demo.config;
 
-import io.swagger.v3.oas.models.SwaggerConfig;
+import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.context.annotation.Bean;
@@ -12,18 +12,17 @@ import java.util.List;
 public class SwaggerConfig {
 
     @Bean
-    public SwaggerConfig customOpenAPI() {
-        // Define your server link (Update the URL to match your environment)
-        Server server = new Server();
-        server.setUrl("https://9270.pro604cr.amypo.ai/");
-        server.setDescription("Development Server");
+    public OpenAPI customOpenAPI() {
+        // Define the server URL
+        Server localServer = new Server();
+        localServer.setUrl("https://9002.pro604cr.amypo.ai/");
+        localServer.setDescription("Local Development Server");
 
-        // You can add more servers (e.g., Production) to the list
-        return new SwaggerConfig()
+        return new OpenAPI()
                 .info(new Info()
-                        .title("Skill Barter Matchmaking Platform API")
+                        .title("API Rate Limiter")
                         .version("1.0")
-                        .description("API documentation for the Skill Barter Platform"))
-                .servers(List.of(server));
+                        .description("Documentation for API Rate Limiter endpoints"))
+                .servers(List.of(localServer));
     }
 }
