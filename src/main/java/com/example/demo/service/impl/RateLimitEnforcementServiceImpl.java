@@ -2,15 +2,16 @@ package com.example.demo.service.impl;
 
 import com.example.demo.repository.RateLimitEnforcementRepository;
 import com.example.demo.repository.ApiKeyRepository;
+import com.example.demo.service.RateLimitEnforcementService;
+// ... other imports
 
 public class RateLimitEnforcementServiceImpl implements RateLimitEnforcementService {
-    private final RateLimitEnforcementRepository repository;
+    private final RateLimitEnforcementRepository rateLimitEnforcementRepository;
     private final ApiKeyRepository apiKeyRepository;
 
-    // Must have this constructor
-    public RateLimitEnforcementServiceImpl(RateLimitEnforcementRepository repository, 
+    public RateLimitEnforcementServiceImpl(RateLimitEnforcementRepository rateLimitEnforcementRepository, 
                                            ApiKeyRepository apiKeyRepository) {
-        this.repository = repository;
+        this.rateLimitEnforcementRepository = rateLimitEnforcementRepository;
         this.apiKeyRepository = apiKeyRepository;
     }
 }
