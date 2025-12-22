@@ -16,7 +16,6 @@ public class RateLimitEnforcementServiceImpl implements RateLimitEnforcementServ
     private final RateLimitEnforcementRepository rateLimitEnforcementRepository;
     private final ApiKeyRepository apiKeyRepository;
 
-    // Required Constructor Injection [cite: 264]
     public RateLimitEnforcementServiceImpl(RateLimitEnforcementRepository rateLimitEnforcementRepository, 
                                            ApiKeyRepository apiKeyRepository) {
         this.rateLimitEnforcementRepository = rateLimitEnforcementRepository;
@@ -30,7 +29,6 @@ public class RateLimitEnforcementServiceImpl implements RateLimitEnforcementServ
         return mapToDto(enforcement);
     }
 
-    // Example of the mapping logic that was causing errors [cite: 395]
     private RateLimitEnforcementDto mapToDto(RateLimitEnforcement enforcement) {
         RateLimitEnforcementDto dto = new RateLimitEnforcementDto();
         dto.setId(enforcement.getId()); // Fixes "cannot find symbol getId()"
@@ -39,7 +37,21 @@ public class RateLimitEnforcementServiceImpl implements RateLimitEnforcementServ
         dto.setLimitExceededBy(enforcement.getLimitExceededBy());
         dto.setMessage(enforcement.getMessage());
         return dto;
-    }
+    } 
+
+    @Override
+public List<RateLimitEnforcementDto> getEnforcementsForKey(Long keyId) {
+    // Fetch from repository [cite: 1302, 1542]
+    List<RateLimitEnforcement> enforcements = rateLimitEnforcementRepository.findByApiKey_Id(keyId);
     
-    // Implement other required methods: createEnforcement and getEnforcementsForKey 
+    return enforcements.stream().map(enforcement -> {
+        RateLimitEnforcementDto dto = new RateLimitEnforcementDto();
+        dto.setId(enforcement.getId());
+        dto.setApiKeyId(enforcement.getApiKey().getId());
+        dto.setBlockedAt(enforcement.getBlockedAt()); // Matches LocalDateTime [cite: 1491]
+        dto.setLimitExceededBy(enforcement.getLimitExceededBy());
+        dto.setMessage(enforcement.getMessage());
+        return dto;
+    }).collect(Collectors.toList());
+}
 }
