@@ -5,7 +5,6 @@ import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import java.util.List;
 
 @Configuration
@@ -13,16 +12,16 @@ public class SwaggerConfig {
 
     @Bean
     public OpenAPI customOpenAPI() {
-        // Define the server URL
-        Server localServer = new Server();
-        localServer.setUrl("https://9002.pro604cr.amypo.ai/");
-        localServer.setDescription("Local Development Server");
+        // Use the URL from your browser preview
+        Server previewServer = new Server();
+        previewServer.setUrl("https://9002.pro604cr.amypo.ai");
+        previewServer.setDescription("Preview Environment");
 
         return new OpenAPI()
                 .info(new Info()
                         .title("API Rate Limiter")
                         .version("1.0")
-                        .description("Documentation for API Rate Limiter endpoints"))
-                .servers(List.of(localServer));
+                        .description("API documentation for the Rate Limiter project"))
+                .servers(List.of(previewServer));
     }
 }
