@@ -4,20 +4,24 @@ import java.time.LocalDateTime;
 
 public class RateLimitEnforcementDto {
     private Long id;
-    private Long apiKeyId; // To represent the associated API key [cite: 235]
+    private Long apiKeyId;
     private LocalDateTime blockedAt;
     private Integer limitExceededBy;
     private String message;
 
-    // Standard no-arg and parameterized constructors [cite: 240, 241]
-    public RateLimitEnforcementDto() {}
+    // Standard Getters and Setters are required
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public RateLimitEnforcementDto(Long apiKeyId, LocalDateTime blockedAt, Integer limitExceededBy, String message) {
-        this.apiKeyId = apiKeyId;
-        this.blockedAt = blockedAt;
-        this.limitExceededBy = limitExceededBy;
-        this.message = message;
-    }
+    public Long getApiKeyId() { return apiKeyId; }
+    public void setApiKeyId(Long apiKeyId) { this.apiKeyId = apiKeyId; }
 
-    // Add Getters and Setters for all fields
+    public LocalDateTime getBlockedAt() { return blockedAt; }
+    public void setBlockedAt(LocalDateTime blockedAt) { this.blockedAt = blockedAt; }
+
+    public Integer getLimitExceededBy() { return limitExceededBy; }
+    public void setLimitExceededBy(Integer limitExceededBy) { this.limitExceededBy = limitExceededBy; }
+
+    public String getMessage() { return message; }
+    public void setMessage(String message) { this.message = message; }
 }
