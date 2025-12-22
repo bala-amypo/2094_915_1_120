@@ -1,27 +1,28 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Table(name = "quota_plan")
+@Getter @Setter
 public class QuotaPlan {
-
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, unique = true)
     private String planName;
-    private int dailyLimit;
-    private boolean active = true;
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    @Column(nullable = false)
+    @Min(value = 1, message = "Daily limit must be greater than 0")
+    private Integer dailyLimit;
 
-    public String getPlanName() { return planName; }
-    public void setPlanName(String planName) { this.planName = planName; }
+    @Column(columnDefinition = "TEXT")
+    private String description;
 
-    public int getDailyLimit() { return dailyLimit; }
-    public void setDailyLimit(int dailyLimit) { this.dailyLimit = dailyLimit; }
-
-    public boolean isActive() { return active; }
-    public void setActive(boolean active) { this.active = active; }
+    @Column(nullable = false)
+    private Boolean active = true;
 }

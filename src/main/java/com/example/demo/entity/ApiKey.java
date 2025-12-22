@@ -1,33 +1,34 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import java.sql.Timestamp;
 
 @Entity
+@Table(name = "api_key")
+@Getter @Setter
 public class ApiKey {
-
-    @Id 
-    @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, unique = true)
     private String keyValue;
-    private boolean active = true;
+
+    @Column(nullable = false)
     private Long ownerId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "plan_id", nullable = false)
     private QuotaPlan plan;
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    @Column(nullable = false)
+    private Boolean active = true;
 
-    public String getKeyValue() { return keyValue; }
-    public void setKeyValue(String keyValue) { this.keyValue = keyValue; }
+    @Column(nullable = false, updatable = false)
+    private Timestamp createdAt;
 
-    public boolean isActive() { return active; }
-    public void setActive(boolean active) { this.active = active; }
-
-    public Long getOwnerId() { return ownerId; }
-    public void setOwnerId(Long ownerId) { this.ownerId = ownerId; }
-
-    public QuotaPlan getPlan() { return plan; }
-    public void setPlan(QuotaPlan plan) { this.plan = plan; }
+    @Column(nullable = false)
+    private Timestamp updatedAt;
 }
