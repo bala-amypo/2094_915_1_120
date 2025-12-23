@@ -1,12 +1,8 @@
-// com/example/demo/model/ApiUsageLog.java
 package com.example.demo.model;
 
 import jakarta.persistence.*;
 import java.sql.Timestamp;
 
-/**
- * Entity representing an API usage log.
- */
 @Entity
 @Table(name = "api_usage_log")
 public class ApiUsageLog {
