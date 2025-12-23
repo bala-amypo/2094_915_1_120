@@ -6,3 +6,4 @@ public interface AuthService {
     void register(RegisterRequestDto dto);
     AuthResponseDto login(AuthRequestDto dto);
 }
+    
