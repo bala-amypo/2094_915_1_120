@@ -15,25 +15,24 @@ public class ApiUsageLogServiceImpl implements ApiUsageLogService {
         this.apiUsageLogRepository = apiUsageLogRepository;
     }
 
-    /**
-     * EXACT match with interface
-     */
+    
     @Override
     public Long countRequestsToday(Long apiKeyId) {
-        // minimal safe implementation
         return 0L;
     }
 
-    /**
-     * EXACT match with interface
-     */
+
+    @Override
+    public Long getUsageForToday(Long apiKeyId) {
+        return 0L;
+    }
+
+
     @Override
     public void logRequest(ApiKey apiKey, String endpoint) {
         ApiUsageLog log = new ApiUsageLog();
         log.setApiKey(apiKey);
         log.setEndpoint(endpoint);
-
-        // DO NOT set timestamp (no setter exists)
         apiUsageLogRepository.save(log);
     }
 }
