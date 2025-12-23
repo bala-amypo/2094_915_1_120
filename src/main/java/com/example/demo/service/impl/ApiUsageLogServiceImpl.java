@@ -20,26 +20,26 @@ public class ApiUsageLogServiceImpl implements ApiUsageLogService {
 
     @Override
     public Long countRequestsToday(Long apiKeyId) {
-        // minimal implementation to satisfy interface
         return 0L;
     }
 
     @Override
     public List<ApiUsageLogDto> getUsageForToday(Long apiKeyId) {
-        // minimal implementation
         return Collections.emptyList();
     }
 
     @Override
     public List<ApiUsageLogDto> getUsageForApiKey(Long apiKeyId) {
-        // minimal implementation
         return Collections.emptyList();
     }
 
     @Override
-    public void logUsage(ApiUsageLogDto apiUsageLogDto) {
-        // minimal safe persistence
+    public ApiUsageLogDto logUsage(ApiUsageLogDto apiUsageLogDto) {
+        // Minimal safe persistence
         ApiUsageLog log = new ApiUsageLog();
         apiUsageLogRepository.save(log);
+
+        // MUST return ApiUsageLogDto (as per interface)
+        return apiUsageLogDto;
     }
 }
