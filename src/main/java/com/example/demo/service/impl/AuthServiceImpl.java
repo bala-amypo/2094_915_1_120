@@ -4,7 +4,6 @@ import com.example.demo.dto.*;
 import com.example.demo.entity.UserAccount;
 import com.example.demo.exception.BadRequestException;
 import com.example.demo.repository.UserAccountRepository;
-import com.example.demo.security.JwtUtil;
 import com.example.demo.service.AuthService;
 
 import java.util.Map;
