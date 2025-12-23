@@ -3,25 +3,29 @@ package com.example.demo.config;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.servers.Server;
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import java.util.List;
 
 @Configuration
 public class SwaggerConfig {
-
     @Bean
     public OpenAPI customOpenAPI() {
-        // Use the URL from your browser preview
-        Server previewServer = new Server();
-        previewServer.setUrl("https://9002.pro604cr.amypo.ai");
-        previewServer.setDescription("Preview Environment");
-
         return new OpenAPI()
-                .info(new Info()
-                        .title("API Rate Limiter")
-                        .version("1.0")
-                        .description("API documentation for the Rate Limiter project"))
-                .servers(List.of(previewServer));
+            .info(new Info()
+                .title("API Rate Limiter & Quota Manager")
+                .version("1.0.0")
+                .description("REST API for managing API keys, rate limits, and usage quotas"))
+            .addServersItem(new Server()
+                .url("http://localhost:8080")
+                .description("Development Server"))
+            .components(new Components()
+                .addSecuritySchemes("bearer-jwt",
+                    new SecurityScheme()
+                        .type(SecurityScheme.Type.HTTP)
+                        .scheme("bearer")
+                        .bearerFormat("JWT")
+                        .description("Enter JWT token")));
     }
 }
