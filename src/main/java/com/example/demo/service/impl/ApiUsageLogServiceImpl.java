@@ -1,6 +1,6 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.entity.ApiUsageLog;
+import com.example.demo.model.ApiUsageLog;
 import com.example.demo.repository.ApiUsageLogRepository;
 import com.example.demo.service.ApiUsageLogService;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,6 @@ public class ApiUsageLogServiceImpl implements ApiUsageLogService {
     @Override
     public long countRequests(String apiKey, long windowMillis) {
         ZonedDateTime now = ZonedDateTime.now();
-
         ZonedDateTime fromTime = now.minus(Duration.ofMillis(windowMillis));
 
         return apiUsageLogRepository
@@ -44,7 +43,6 @@ public class ApiUsageLogServiceImpl implements ApiUsageLogService {
             long windowMillis
     ) {
         ZonedDateTime now = ZonedDateTime.now();
-
         ZonedDateTime fromTime = now.minus(Duration.ofMillis(windowMillis));
 
         return apiUsageLogRepository
