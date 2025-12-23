@@ -18,7 +18,7 @@ public class SwaggerConfig {
                 .version("1.0.0")
                 .description("REST API for managing API keys, rate limits, and usage quotas"))
             .addServersItem(new Server()
-                .url("http://localhost:8080")
+                .url("https://9107.408procr.amypo.ai/")
                 .description("Development Server"))
             .components(new Components()
                 .addSecuritySchemes("bearer-jwt",
