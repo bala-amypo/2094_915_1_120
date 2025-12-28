@@ -16,10 +16,15 @@ public class RateLimitEnforcementServiceImpl implements RateLimitEnforcementServ
     }
 
     @Override
+    public RateLimitEnforcement createEnforcement(RateLimitEnforcement enforcement) {
+        return repository.save(enforcement);
+    }
+
+    @Override
     public List<RateLimitEnforcement> getEnforcementsForKey(Long apiKeyId) {
         return repository.findAll()
                 .stream()
-                .filter(e -> e.apiKeyId.equals(apiKeyId))
+                .filter(e -> e.getApiKey().getId().equals(apiKeyId))
                 .collect(Collectors.toList());
     }
 

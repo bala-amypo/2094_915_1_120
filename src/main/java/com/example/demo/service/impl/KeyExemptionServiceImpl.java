@@ -21,7 +21,7 @@ public class KeyExemptionServiceImpl implements KeyExemptionService {
     public KeyExemption getExemptionByKey(Long apiKeyId) {
         return repository.findAll()
                 .stream()
-                .filter(e -> e.apiKeyId.equals(apiKeyId))
+                .filter(e -> e.getApiKey().getId().equals(apiKeyId))
                 .findFirst()
                 .orElse(null);
     }
