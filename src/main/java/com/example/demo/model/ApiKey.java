@@ -1,24 +1,34 @@
 package com.example.demo.model;
 
+import java.sql.Timestamp;
+
 public class ApiKey {
+
     private Long id;
-    private String keyValue;
-    private boolean active = true;
-    private Long ownerId;
-    private QuotaPlan plan;
+    private String key;
+    private boolean active;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
+    private QuotaPlan quotaPlan;
+
+    public ApiKey() {}
+
+    public ApiKey(String key, Long id, QuotaPlan quotaPlan) {
+        this.key = key;
+        this.id = id;
+        this.quotaPlan = quotaPlan;
+        this.active = true;
+        this.createdAt = new Timestamp(System.currentTimeMillis());
+        this.updatedAt = this.createdAt;
+    }
 
     public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public String getKey() { return key; }
+    public boolean getActive() { return active; }
+    public Timestamp getCreatedAt() { return createdAt; }
+    public Timestamp getUpdatedAt() { return updatedAt; }
 
-    public String getKeyValue() { return keyValue; }
-    public void setKeyValue(String keyValue) { this.keyValue = keyValue; }
-
-    public boolean isActive() { return active; }
-    public void setActive(boolean active) { this.active = active; }
-
-    public Long getOwnerId() { return ownerId; }
-    public void setOwnerId(Long ownerId) { this.ownerId = ownerId; }
-
-    public QuotaPlan getPlan() { return plan; }
-    public void setPlan(QuotaPlan plan) { this.plan = plan; }
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }

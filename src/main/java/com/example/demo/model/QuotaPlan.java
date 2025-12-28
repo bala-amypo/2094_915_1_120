@@ -1,20 +1,23 @@
 package com.example.demo.model;
 
 public class QuotaPlan {
+
     private Long id;
-    private String planName;
-    private int dailyLimit;
-    private boolean active = true;
+    private String name;
+    private Integer dailyLimit;
+    private String description;
+    private boolean active;
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public QuotaPlan() {}
 
-    public String getPlanName() { return planName; }
-    public void setPlanName(String planName) { this.planName = planName; }
+    public QuotaPlan(String name, Integer dailyLimit, String description) {
+        this.name = name;
+        this.dailyLimit = dailyLimit;
+        this.description = description;
+        this.active = true;
+    }
 
-    public int getDailyLimit() { return dailyLimit; }
-    public void setDailyLimit(int dailyLimit) { this.dailyLimit = dailyLimit; }
-
-    public boolean isActive() { return active; }
-    public void setActive(boolean active) { this.active = active; }
+    public String getDescription() { return description; }
+    public boolean getActive() { return active; }
+    public void setDescription(String description) { this.description = description; }
 }
