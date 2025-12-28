@@ -1,7 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dto.ApiUsageLogDto;
-import com.example.demo.model.ApiUsageLog;
+import com.example.demo.entity.ApiUsageLog;
 import com.example.demo.repository.ApiUsageLogRepository;
 import com.example.demo.service.ApiUsageLogService;
 import org.springframework.stereotype.Service;
