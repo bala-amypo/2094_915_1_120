@@ -15,12 +15,7 @@ public class ApiUsageLogServiceImpl implements ApiUsageLogService {
     }
 
     @Override
-    public ApiUsageLog save(ApiUsageLog log) {
-        return repository.save(log);
-    }
-
-    @Override
-    public List<ApiUsageLog> findAll() {
-        return repository.findAll();
+    public List<ApiUsageLog> getUsageForApiKey(Long apiKeyId) {
+        return repository.findByApiKeyId(apiKeyId);
     }
 }
