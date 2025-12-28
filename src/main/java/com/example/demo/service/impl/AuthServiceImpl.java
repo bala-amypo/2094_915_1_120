@@ -26,12 +26,10 @@ public class AuthServiceImpl implements AuthService {
             throw new BadRequestException("Email already exists");
         }
 
-        UserAccount user = new UserAccount(
-                null,
-                dto.getEmail(),
-                dto.getPassword(),
-                dto.getRole()
-        );
+        UserAccount user = new UserAccount();
+        user.email = dto.getEmail();
+        user.password = dto.getPassword();
+        user.role = dto.getRole();
 
         userRepo.save(user);
     }
@@ -42,7 +40,7 @@ public class AuthServiceImpl implements AuthService {
         UserAccount user = userRepo.findByEmail(dto.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        String token = jwtUtil.generateToken(Map.of(), user.getEmail());
+        String token = jwtUtil.generateToken(Map.of(), user.email);
         return new AuthResponseDto(token);
     }
 }

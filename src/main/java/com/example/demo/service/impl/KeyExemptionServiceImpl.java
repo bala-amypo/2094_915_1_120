@@ -13,7 +13,16 @@ public class KeyExemptionServiceImpl implements KeyExemptionService {
     }
 
     @Override
+    public KeyExemption createExemption(KeyExemption exemption) {
+        return repository.save(exemption);
+    }
+
+    @Override
     public KeyExemption getExemptionByKey(Long apiKeyId) {
-        return repository.findByApiKeyId(apiKeyId).orElse(null);
+        return repository.findAll()
+                .stream()
+                .filter(e -> e.apiKeyId.equals(apiKeyId))
+                .findFirst()
+                .orElse(null);
     }
 }

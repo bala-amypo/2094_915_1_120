@@ -5,6 +5,7 @@ import com.example.demo.repository.RateLimitEnforcementRepository;
 import com.example.demo.service.RateLimitEnforcementService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RateLimitEnforcementServiceImpl implements RateLimitEnforcementService {
 
@@ -16,6 +17,14 @@ public class RateLimitEnforcementServiceImpl implements RateLimitEnforcementServ
 
     @Override
     public List<RateLimitEnforcement> getEnforcementsForKey(Long apiKeyId) {
-        return repository.findByApiKeyId(apiKeyId);
+        return repository.findAll()
+                .stream()
+                .filter(e -> e.apiKeyId.equals(apiKeyId))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public RateLimitEnforcement getEnforcementById(Long id) {
+        return repository.findById(id).orElse(null);
     }
 }

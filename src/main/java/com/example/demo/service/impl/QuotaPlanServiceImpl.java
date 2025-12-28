@@ -18,4 +18,9 @@ public class QuotaPlanServiceImpl implements QuotaPlanService {
     public List<QuotaPlan> getAllPlans() {
         return repository.findAll();
     }
+
+    @Override
+    public QuotaPlan getQuotaPlanById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
 }
