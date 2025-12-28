@@ -1,18 +1,31 @@
 package com.example.demo.security;
 
-import com.example.demo.model.UserAccount;
+import com.example.demo.entity.UserAccount;
 import com.example.demo.repository.UserAccountRepository;
+import org.springframework.security.core.userdetails.*;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.stereotype.Service;
 
-public class CustomUserDetailsService {
+import java.util.List;
 
-    private final UserAccountRepository repo;
+@Service
+public class CustomUserDetailsService implements UserDetailsService {
 
-    public CustomUserDetailsService(UserAccountRepository repo) {
-        this.repo = repo;
+    private final UserAccountRepository userRepo;
+
+    public CustomUserDetailsService(UserAccountRepository userRepo) {
+        this.userRepo = userRepo;
     }
 
-    public UserAccount loadUserByUsername(String email) {
-        return repo.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+    @Override
+    public UserDetails loadUserByUsername(String username) {
+        UserAccount user = userRepo.findByEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        return new User(
+                user.getEmail(),
+                user.getPassword(),
+                List.of(new SimpleGrantedAuthority(user.getRole()))
+        );
     }
 }
