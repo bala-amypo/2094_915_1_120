@@ -1,8 +1,18 @@
 package com.example.demo.security;
 
-import org.springframework.stereotype.Service;
+import com.example.demo.entity.UserAccount;
+import com.example.demo.repository.UserAccountRepository;
 
-@Service
 public class CustomUserDetailsService {
-    // Dummy class just to satisfy references
+
+    private final UserAccountRepository repo;
+
+    public CustomUserDetailsService(UserAccountRepository repo) {
+        this.repo = repo;
+    }
+
+    public UserAccount loadUserByUsername(String email) {
+        return repo.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
 }

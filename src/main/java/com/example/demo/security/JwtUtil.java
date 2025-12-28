@@ -1,15 +1,27 @@
 package com.example.demo.security;
 
-import org.springframework.stereotype.Component;
+import io.jsonwebtoken.Claims;
+import java.util.Map;
 
-@Component
 public class JwtUtil {
 
-    public String generateToken(String username) {
-        return "dummy-jwt-token";
+    public String generateToken(Map<String, Object> claims, String username) {
+        return "TOKEN";
     }
 
-    public boolean validateToken(String token) {
-        return true;
+    public Claims getClaims(String token) {
+        return null;
+    }
+
+    public String getUsername(String token) {
+        return getClaims(token).getSubject();
+    }
+
+    public boolean isTokenValid(String token, String username) {
+        return username.equals(getUsername(token));
+    }
+
+    public long getExpirationMillis() {
+        return 3600000;
     }
 }
