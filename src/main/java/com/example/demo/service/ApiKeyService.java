@@ -1,3 +1,8 @@
+package com.example.demo.service;
+
+import com.example.demo.model.ApiKey;
+import java.util.List;
+
 public interface ApiKeyService {
 
     ApiKey createApiKey(ApiKey apiKey);
