@@ -1,6 +1,6 @@
 package com.example.demo.security;
 
-import com.example.demo.entity.UserAccount;
+import com.example.demo.model.UserAccount;
 import com.example.demo.repository.UserAccountRepository;
 
 public class CustomUserDetailsService {
