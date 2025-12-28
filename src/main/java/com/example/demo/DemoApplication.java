@@ -1,4 +1,3 @@
-// com/example/demo/DemoApplication.java
 package com.example.demo;
 
 import org.springframework.boot.SpringApplication;
