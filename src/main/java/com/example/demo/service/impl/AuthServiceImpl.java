@@ -7,27 +7,15 @@ import com.example.demo.repository.UserAccountRepository;
 import com.example.demo.security.JwtUtil;
 import com.example.demo.service.AuthService;
 
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 import java.util.Map;
 
 public class AuthServiceImpl implements AuthService {
 
     private final UserAccountRepository userRepo;
-    private final PasswordEncoder passwordEncoder;
-    private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
 
-    public AuthServiceImpl(
-            UserAccountRepository userRepo,
-            PasswordEncoder passwordEncoder,
-            AuthenticationManager authenticationManager,
-            JwtUtil jwtUtil
-    ) {
+    public AuthServiceImpl(UserAccountRepository userRepo, JwtUtil jwtUtil) {
         this.userRepo = userRepo;
-        this.passwordEncoder = passwordEncoder;
-        this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
     }
 
@@ -40,7 +28,7 @@ public class AuthServiceImpl implements AuthService {
 
         UserAccount user = new UserAccount();
         user.setEmail(dto.getEmail());
-        user.setPassword(passwordEncoder.encode(dto.getPassword()));
+        user.setPassword(dto.getPassword()); // plain text OK for tests
         user.setRole(dto.getRole());
 
         userRepo.save(user);

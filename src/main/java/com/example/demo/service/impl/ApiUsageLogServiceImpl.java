@@ -1,45 +1,26 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dto.ApiUsageLogDto;
 import com.example.demo.entity.ApiUsageLog;
 import com.example.demo.repository.ApiUsageLogRepository;
 import com.example.demo.service.ApiUsageLogService;
-import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
-@Service
 public class ApiUsageLogServiceImpl implements ApiUsageLogService {
 
-    private final ApiUsageLogRepository apiUsageLogRepository;
+    private final ApiUsageLogRepository repository;
 
-    public ApiUsageLogServiceImpl(ApiUsageLogRepository apiUsageLogRepository) {
-        this.apiUsageLogRepository = apiUsageLogRepository;
+    public ApiUsageLogServiceImpl(ApiUsageLogRepository repository) {
+        this.repository = repository;
     }
 
     @Override
-    public Long countRequestsToday(Long apiKeyId) {
-        return 0L;
+    public ApiUsageLog save(ApiUsageLog log) {
+        return repository.save(log);
     }
 
     @Override
-    public List<ApiUsageLogDto> getUsageForToday(Long apiKeyId) {
-        return Collections.emptyList();
-    }
-
-    @Override
-    public List<ApiUsageLogDto> getUsageForApiKey(Long apiKeyId) {
-        return Collections.emptyList();
-    }
-
-    @Override
-    public ApiUsageLogDto logUsage(ApiUsageLogDto apiUsageLogDto) {
-        // Minimal safe persistence
-        ApiUsageLog log = new ApiUsageLog();
-        apiUsageLogRepository.save(log);
-
-        // MUST return ApiUsageLogDto (as per interface)
-        return apiUsageLogDto;
+    public List<ApiUsageLog> findAll() {
+        return repository.findAll();
     }
 }
