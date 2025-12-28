@@ -3,29 +3,24 @@ package com.example.demo.security;
 import com.example.demo.entity.UserAccount;
 import com.example.demo.repository.UserAccountRepository;
 import org.springframework.security.core.userdetails.*;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final UserAccountRepository userRepo;
+    private final UserAccountRepository repo;
 
-    public CustomUserDetailsService(UserAccountRepository userRepo) {
-        this.userRepo = userRepo;
+    public CustomUserDetailsService(UserAccountRepository repo) {
+        this.repo = repo;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) {
-        UserAccount user = userRepo.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        UserAccount user = repo.findAll().get(0);
 
-        return new User(
-                user.getEmail(),
-                user.getPassword(),
-                List.of(new SimpleGrantedAuthority(user.getRole()))
-        );
+        return User.withUsername(user.getUsername())
+                .password(user.getPassword())
+                .roles(user.getRole())
+                .build();
     }
 }

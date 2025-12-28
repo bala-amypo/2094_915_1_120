@@ -1,30 +1,21 @@
+package com.example.demo.service.impl;
+
+import com.example.demo.repository.ApiKeyRepository;
+import com.example.demo.service.ApiKeyService;
+import com.example.demo.entity.ApiKey;
+import org.springframework.stereotype.Service;
+import java.util.List;
+
 @Service
 public class ApiKeyServiceImpl implements ApiKeyService {
-    private final ApiKeyRepository apiKeyRepository;
-    private final QuotaPlanRepository quotaPlanRepository;
 
-    // Strict requirement: Constructor Injection
-    public ApiKeyServiceImpl(ApiKeyRepository apiKeyRepository, QuotaPlanRepository quotaPlanRepository) {
-        this.apiKeyRepository = apiKeyRepository;
-        this.quotaPlanRepository = quotaPlanRepository;
+    private final ApiKeyRepository repo;
+
+    public ApiKeyServiceImpl(ApiKeyRepository repo) {
+        this.repo = repo;
     }
 
-    @Override
-    public ApiKey createApiKey(ApiKey apiKey) {
-        // Business Rule: Plan must be active
-        QuotaPlan plan = quotaPlanRepository.findById(apiKey.getPlan().getId())
-                .orElseThrow(() -> new ResourceNotFoundException("QuotaPlan not found"));
-        
-        if (!plan.getActive()) {
-            throw new BadRequestException("Cannot associate an inactive plan");
-        }
-        
-        // Business Rule: KeyValue must be unique
-        if (apiKeyRepository.findByKeyValue(apiKey.getKeyValue()).isPresent()) {
-            throw new IllegalArgumentException("API Key value already exists");
-        }
-        
-        return apiKeyRepository.save(apiKey);
+    public List<ApiKey> getAllKeys() {
+        return repo.findAll();
     }
-    // Other methods: updateApiKey, deactivateApiKey, etc.
 }
