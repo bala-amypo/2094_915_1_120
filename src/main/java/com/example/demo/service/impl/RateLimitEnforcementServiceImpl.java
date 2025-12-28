@@ -15,12 +15,7 @@ public class RateLimitEnforcementServiceImpl implements RateLimitEnforcementServ
     }
 
     @Override
-    public RateLimitEnforcement save(RateLimitEnforcement enforcement) {
-        return repository.save(enforcement);
-    }
-
-    @Override
-    public List<RateLimitEnforcement> findAll() {
-        return repository.findAll();
+    public List<RateLimitEnforcement> getEnforcementsForKey(Long apiKeyId) {
+        return repository.findByApiKeyId(apiKeyId);
     }
 }

@@ -15,12 +15,7 @@ public class QuotaPlanServiceImpl implements QuotaPlanService {
     }
 
     @Override
-    public QuotaPlan save(QuotaPlan plan) {
-        return repository.save(plan);
-    }
-
-    @Override
-    public List<QuotaPlan> findAll() {
+    public List<QuotaPlan> getAllPlans() {
         return repository.findAll();
     }
 }

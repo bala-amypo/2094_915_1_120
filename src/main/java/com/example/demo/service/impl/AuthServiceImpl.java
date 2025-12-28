@@ -22,14 +22,16 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public void register(RegisterRequestDto dto) {
 
-        if (userRepo.existsByEmail(dto.getEmail())) {
+        if (userRepo.findByEmail(dto.getEmail()).isPresent()) {
             throw new BadRequestException("Email already exists");
         }
 
-        UserAccount user = new UserAccount();
-        user.setEmail(dto.getEmail());
-        user.setPassword(dto.getPassword()); // plain text OK for tests
-        user.setRole(dto.getRole());
+        UserAccount user = new UserAccount(
+                null,
+                dto.getEmail(),
+                dto.getPassword(),
+                dto.getRole()
+        );
 
         userRepo.save(user);
     }
