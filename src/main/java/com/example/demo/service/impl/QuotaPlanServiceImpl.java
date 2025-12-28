@@ -31,7 +31,7 @@ public class QuotaPlanServiceImpl implements QuotaPlanService {
 
     @Override
     public QuotaPlan updatePlan(Long id, QuotaPlan plan) {
-        plan.id = id;
+        plan.setId(id);
         return repository.save(plan);
     }
 }

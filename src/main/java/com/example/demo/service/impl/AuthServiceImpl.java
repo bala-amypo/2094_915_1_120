@@ -27,9 +27,9 @@ public class AuthServiceImpl implements AuthService {
         }
 
         UserAccount user = new UserAccount();
-        user.email = dto.getEmail();
-        user.password = dto.getPassword();
-        user.role = dto.getRole();
+        user.setEmail(dto.getEmail());
+        user.setPassword(dto.getPassword());
+        user.setRole(dto.getRole());
 
         userRepo.save(user);
     }
@@ -40,7 +40,7 @@ public class AuthServiceImpl implements AuthService {
         UserAccount user = userRepo.findByEmail(dto.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        String token = jwtUtil.generateToken(Map.of(), user.email);
+        String token = jwtUtil.generateToken(Map.of(), user.getEmail());
         return new AuthResponseDto(token);
     }
 }
