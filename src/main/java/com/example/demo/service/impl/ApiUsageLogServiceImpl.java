@@ -18,17 +18,16 @@ public class ApiUsageLogServiceImpl implements ApiUsageLogService {
     }
 
     @Override
-    public void logUsage(ApiUsageLog log) {
-        repository.save(log);
+    public ApiUsageLog logUsage(ApiUsageLog log) {
+        return repository.save(log);
     }
 
     @Override
     public List<ApiUsageLog> getUsageForApiKey(Long apiKeyId) {
         return repository.findAll()
                 .stream()
-                .filter(log ->
-                        log.getApiKey() != null &&
-                        log.getApiKey().getKeyId().equals(apiKeyId))
+                .filter(l -> l.getApiKey() != null &&
+                             l.getApiKey().getId().equals(apiKeyId))
                 .collect(Collectors.toList());
     }
 
@@ -36,15 +35,12 @@ public class ApiUsageLogServiceImpl implements ApiUsageLogService {
     public List<ApiUsageLog> getUsageForToday(Long apiKeyId) {
         LocalDate today = LocalDate.now();
 
-        return repository.findAll()
+        return getUsageForApiKey(apiKeyId)
                 .stream()
-                .filter(log ->
-                        log.getApiKey() != null &&
-                        log.getApiKey().getKeyId().equals(apiKeyId) &&
-                        log.getTimestamp()
-                                .atZone(ZoneId.systemDefault())
-                                .toLocalDate()
-                                .equals(today))
+                .filter(l -> l.getTimestamp()
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDate()
+                        .equals(today))
                 .collect(Collectors.toList());
     }
 
