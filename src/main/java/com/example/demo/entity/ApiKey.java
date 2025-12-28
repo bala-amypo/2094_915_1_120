@@ -1,20 +1,22 @@
+package com.example.demo.entity;
+
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "api_keys")
-public class ApiKey {
+public class ApiKey{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
-    private String keyValue;
+    @Column(unique = true)
+    private String apiKey;
 
-    private Long ownerId;
+    private LocalDateTime createdAt;
+    private LocalDateTime expiresAt;
 
     @ManyToOne
-    private QuotaPlan plan;
-
-    private Boolean active = true;
-    private LocalDateTime createdAt = LocalDateTime.now();
-    private LocalDateTime updatedAt = LocalDateTime.now();
-    // Getters and Setters...
+    private QuotaPlan quotaPlan;
 }
