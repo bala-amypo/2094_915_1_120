@@ -15,6 +15,11 @@ public class QuotaPlanServiceImpl implements QuotaPlanService {
     }
 
     @Override
+    public QuotaPlan createPlan(QuotaPlan plan) {
+        return repository.save(plan);
+    }
+
+    @Override
     public List<QuotaPlan> getAllPlans() {
         return repository.findAll();
     }
@@ -26,7 +31,7 @@ public class QuotaPlanServiceImpl implements QuotaPlanService {
 
     @Override
     public QuotaPlan updatePlan(Long id, QuotaPlan plan) {
-        plan.setId(id);
+        plan.id = id;
         return repository.save(plan);
     }
 }

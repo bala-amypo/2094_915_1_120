@@ -24,7 +24,7 @@ public class RateLimitEnforcementServiceImpl implements RateLimitEnforcementServ
     public List<RateLimitEnforcement> getEnforcementsForKey(Long apiKeyId) {
         return repository.findAll()
                 .stream()
-                .filter(e -> e.getApiKey().getId().equals(apiKeyId))
+                .filter(e -> e.apiKey.keyId.equals(apiKeyId))
                 .collect(Collectors.toList());
     }
 

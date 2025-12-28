@@ -21,22 +21,26 @@ public class ApiUsageLogServiceImpl implements ApiUsageLogService {
     public List<ApiUsageLog> getUsageForApiKey(Long apiKeyId) {
         return repository.findAll()
                 .stream()
-                .filter(log -> log.getApiKey().getId().equals(apiKeyId))
+                .filter(log -> log.apiKey.keyId.equals(apiKeyId))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ApiUsageLog> getUsageForToday(Long apiKeyId) {
+        LocalDate today = LocalDate.now();
+
+        return repository.findAll()
+                .stream()
+                .filter(log ->
+                        log.apiKey.keyId.equals(apiKeyId) &&
+                        log.timestamp.atZone(ZoneId.systemDefault())
+                                .toLocalDate()
+                                .equals(today))
                 .collect(Collectors.toList());
     }
 
     @Override
     public int countRequestsToday(Long apiKeyId) {
-        LocalDate today = LocalDate.now();
-
-        return (int) repository.findAll()
-                .stream()
-                .filter(log ->
-                        log.getApiKey().getId().equals(apiKeyId) &&
-                        log.getTimestamp()
-                                .atZone(ZoneId.systemDefault())
-                                .toLocalDate()
-                                .equals(today))
-                .count();
+        return getUsageForToday(apiKeyId).size();
     }
 }
