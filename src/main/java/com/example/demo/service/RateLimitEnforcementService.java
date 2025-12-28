@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.model.RateLimitEnforcement;
+import com.example.demo.entity.RateLimitEnforcement;
 import java.util.List;
 
 public interface RateLimitEnforcementService {

@@ -1,6 +1,6 @@
 package com.example.demo.repository;
 
-import com.example.demo.model.ApiKey;
+import com.example.demo.entity.ApiKey;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 import java.util.List;
