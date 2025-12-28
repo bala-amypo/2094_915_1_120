@@ -48,4 +48,8 @@ public class ApiUsageLogServiceImpl implements ApiUsageLogService {
                 .collect(Collectors.toList());
     }
 
-    @Ove
+    @Override
+    public int countRequestsToday(Long apiKeyId) {
+        return getUsageForToday(apiKeyId).size();
+    }
+}
