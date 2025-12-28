@@ -1,28 +1,30 @@
-package com.example.demo.model;
-
-import java.sql.Timestamp;
-
 public class KeyExemption {
 
     private Long id;
     private ApiKey apiKey;
+    private String notes;
+    private boolean unlimitedAccess;
     private Integer temporaryExtensionLimit;
-    private Timestamp validUntil;
+    private Instant validUntil;
 
-    public Long getId() { return id; }
+    public KeyExemption() {}
 
     public ApiKey getApiKey() { return apiKey; }
     public void setApiKey(ApiKey apiKey) { this.apiKey = apiKey; }
 
-    public Integer getTemporaryExtensionLimit() {
-        return temporaryExtensionLimit;
+    public String getNotes() { return notes; }
+    public void setNotes(String notes) { this.notes = notes; }
+
+    public boolean getUnlimitedAccess() { return unlimitedAccess; }
+    public void setUnlimitedAccess(boolean unlimitedAccess) {
+        this.unlimitedAccess = unlimitedAccess;
     }
+
+    public Integer getTemporaryExtensionLimit() { return temporaryExtensionLimit; }
     public void setTemporaryExtensionLimit(Integer temporaryExtensionLimit) {
         this.temporaryExtensionLimit = temporaryExtensionLimit;
     }
 
-    public Timestamp getValidUntil() { return validUntil; }
-    public void setValidUntil(Timestamp validUntil) {
-        this.validUntil = validUntil;
-    }
+    public Instant getValidUntil() { return validUntil; }
+    public void setValidUntil(Instant validUntil) { this.validUntil = validUntil; }
 }
