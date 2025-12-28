@@ -5,7 +5,6 @@ import com.example.demo.repository.KeyExemptionRepository;
 import com.example.demo.service.KeyExemptionService;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class KeyExemptionServiceImpl implements KeyExemptionService {
 
@@ -30,7 +29,7 @@ public class KeyExemptionServiceImpl implements KeyExemptionService {
                 .orElse(null);
     }
 
-    @Override
+    // ❗ NO @Override here (not in interface)
     public List<KeyExemption> getAllExemptions() {
         return repository.findAll();
     }
