@@ -1,12 +1,9 @@
 package com.example.demo.service;
-
-import com.example.demo.dto.RateLimitEnforcementDto;
+import com.example.demo.model.*;
 import java.util.List;
 
 public interface RateLimitEnforcementService {
-    RateLimitEnforcementDto createEnforcement(RateLimitEnforcementDto enforcementDto);
-
-    RateLimitEnforcementDto getEnforcementById(Long id);
-
-    List<RateLimitEnforcementDto> getEnforcementsForKey(Long keyId);
+    RateLimitEnforcement createEnforcement(RateLimitEnforcement e);
+    RateLimitEnforcement getEnforcementById(Long id);
+    List<RateLimitEnforcement> getEnforcementsForKey(Long keyId);
 }
