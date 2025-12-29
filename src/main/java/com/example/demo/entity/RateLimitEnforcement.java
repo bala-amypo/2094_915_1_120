@@ -1,23 +1,27 @@
 package com.example.demo.entity;
 
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "rate_limit_enforcement")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class RateLimitEnforcement {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne(optional = false)
     private ApiKey apiKey;
-    private int limitExceededBy;
-    private String message;
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    @Column(nullable = false)
+    private int limitPerMinute;
 
-    public ApiKey getApiKey() { return apiKey; }
-    public void setApiKey(ApiKey apiKey) { this.apiKey = apiKey; }
-
-    public int getLimitExceededBy() { return limitExceededBy; }
-    public void setLimitExceededBy(int limitExceededBy) {
-        this.limitExceededBy = limitExceededBy;
-    }
-
-    public String getMessage() { return message; }
-    public void setMessage(String message) { this.message = message; }
+    @Column(nullable = false)
+    private int requestsMade;
 }
