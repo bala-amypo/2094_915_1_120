@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface KeyExemptionRepository extends JpaRepository<KeyExemption, Long> {
 
     Optional<KeyExemption> findByApiKey(String apiKey);
+    Optional<KeyExemption> findByApiKeyId(Long apiKeyId);
+
 }
