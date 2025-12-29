@@ -6,9 +6,5 @@ public interface KeyExemptionService {
 
     KeyExemption getExemptionByKey(Long apiKeyId);
 
-    boolean isExempted(Long apiKeyId);
-
-    KeyExemption exemptKey(Long apiKeyId);
-
-    void removeExemption(Long apiKeyId);
+    void removeExemption(Long apiKeyId);   
 }

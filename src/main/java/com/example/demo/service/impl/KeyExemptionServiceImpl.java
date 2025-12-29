@@ -18,4 +18,10 @@ public class KeyExemptionServiceImpl implements KeyExemptionService {
     public KeyExemption getExemptionByKey(Long apiKeyId) {
         return repository.findByApiKeyId(apiKeyId).orElse(null);
     }
+
+    @Override
+    public void removeExemption(Long apiKeyId) {
+        repository.findByApiKeyId(apiKeyId)
+                  .ifPresent(repository::delete);
+    }
 }
