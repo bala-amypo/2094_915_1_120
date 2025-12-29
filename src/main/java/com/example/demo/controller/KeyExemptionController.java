@@ -1,21 +1,21 @@
-// package com.example.demo.controller;
+package com.example.demo.controller;
 
-// import com.example.demo.entity.KeyExemption;
-// import com.example.demo.service.KeyExemptionService;
-// import lombok.RequiredArgsConstructor;
-// import org.springframework.web.bind.annotation.*;
+import com.example.demo.entity.KeyExemption;
+import com.example.demo.service.KeyExemptionService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
-// import java.util.List;
+import java.util.List;
 
-// @RestController
-// @RequestMapping("/exemptions")
-// @RequiredArgsConstructor
-// public class KeyExemptionController {
+@RestController
+@RequestMapping("/exemptions")
+@RequiredArgsConstructor
+public class KeyExemptionController {
 
-//     private final KeyExemptionService keyExemptionService;
+    private final KeyExemptionService keyExemptionService;
 
-//     @GetMapping
-//     public List<KeyExemption> findAll() {
-//         return keyExemptionService.findAll();
-//     }
-// }
+    @GetMapping
+    public List<KeyExemption> findAll() {
+        return keyExemptionService.findAll();
+    }
+}
