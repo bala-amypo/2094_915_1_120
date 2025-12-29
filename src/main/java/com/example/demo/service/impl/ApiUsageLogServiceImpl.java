@@ -3,49 +3,19 @@ package com.example.demo.service.impl;
 import com.example.demo.entity.ApiUsageLog;
 import com.example.demo.repository.ApiUsageLogRepository;
 import com.example.demo.service.ApiUsageLogService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.List;
-import java.util.stream.Collectors;
 
+@Service
+@RequiredArgsConstructor
 public class ApiUsageLogServiceImpl implements ApiUsageLogService {
 
     private final ApiUsageLogRepository repository;
 
-    public ApiUsageLogServiceImpl(ApiUsageLogRepository repository) {
-        this.repository = repository;
-    }
-
     @Override
-    public ApiUsageLog logUsage(ApiUsageLog log) {
-        return repository.save(log);
-    }
-
-    @Override
-    public List<ApiUsageLog> getUsageForApiKey(Long apiKeyId) {
-        return repository.findAll()
-                .stream()
-                .filter(l -> l.getApiKey() != null &&
-                             l.getApiKey().getId().equals(apiKeyId))
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<ApiUsageLog> getUsageForToday(Long apiKeyId) {
-        LocalDate today = LocalDate.now();
-
-        return getUsageForApiKey(apiKeyId)
-                .stream()
-                .filter(l -> l.getTimestamp()
-                        .atZone(ZoneId.systemDefault())
-                        .toLocalDate()
-                        .equals(today))
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public int countRequestsToday(Long apiKeyId) {
-        return getUsageForToday(apiKeyId).size();
+    public List<ApiUsageLog> findAll() {
+        return repository.findAll();
     }
 }

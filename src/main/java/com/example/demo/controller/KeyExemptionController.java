@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/exemptions")
+@RequestMapping("/key-exemptions")
 @RequiredArgsConstructor
 public class KeyExemptionController {
 
