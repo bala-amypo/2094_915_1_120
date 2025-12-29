@@ -1,20 +1,27 @@
 package com.example.demo.entity;
 
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "quota_plans")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class QuotaPlan {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, unique = true)
     private String name;
-    private int requestLimit;
 
-    public Long getId() {
-        return id;
-    }
+    @Column(nullable = false)
+    private int monthlyQuota;
 
-    public String getName() {
-        return name;
-    }
-
-    public int getRequestLimit() {
-        return requestLimit;
-    }
+    @Column(nullable = false)
+    private int perMinuteLimit;
 }
