@@ -1,21 +1,21 @@
-package com.example.demo.controller;
+// package com.example.demo.controller;
 
-import com.example.demo.entity.ApiUsageLog;
-import com.example.demo.service.ApiUsageLogService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+// import com.example.demo.entity.ApiUsageLog;
+// import com.example.demo.service.ApiUsageLogService;
+// import lombok.RequiredArgsConstructor;
+// import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+// import java.util.List;
 
-@RestController
-@RequestMapping("/usage")
-@RequiredArgsConstructor
-public class ApiUsageLogController {
+// @RestController
+// @RequestMapping("/usage")
+// @RequiredArgsConstructor
+// public class ApiUsageLogController {
 
-    private final ApiUsageLogService apiUsageLogService;
+//     private final ApiUsageLogService apiUsageLogService;
 
-    @GetMapping
-    public List<ApiUsageLog> findAll() {
-        return apiUsageLogService.findAll();
-    }
-}
+//     @GetMapping
+//     public List<ApiUsageLog> findAll() {
+//         return apiUsageLogService.findAll();
+//     }
+// }
