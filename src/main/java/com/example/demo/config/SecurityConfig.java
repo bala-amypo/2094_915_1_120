@@ -14,22 +14,16 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-
-                // ✅ Allow Swagger without login
                 .requestMatchers(
                     "/swagger-ui/**",
                     "/swagger-ui.html",
                     "/v3/api-docs/**"
                 ).permitAll()
 
-                // ✅ Allow auth APIs
                 .requestMatchers("/auth/**").permitAll()
 
-                // ❌ Secure everything else
                 .anyRequest().authenticated()
             )
-
-            // ❌ Disable Basic Auth popup
             .httpBasic(httpBasic -> httpBasic.disable());
 
         return http.build();
