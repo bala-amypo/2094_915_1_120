@@ -11,20 +11,19 @@ public class UserAccount {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String username;
+    private String email;
 
     @Column(nullable = false)
     private String password;
 
-    // ✅ REQUIRED: No-args constructor
-    public UserAccount() {}
+    public UserAccount() {
+    }
 
-    public UserAccount(String username, String password) {
-        this.username = username;
+    public UserAccount(String email, String password) {
+        this.email = email;
         this.password = password;
     }
 
-    // Getters & Setters
     public Long getId() {
         return id;
     }
@@ -33,18 +32,18 @@ public class UserAccount {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
         return password;
     }
-
+    
     public void setPassword(String password) {
         this.password = password;
     }
