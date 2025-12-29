@@ -1,46 +1,17 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dto.*;
-import com.example.demo.entity.UserAccount;
-import com.example.demo.exception.BadRequestException;
-import com.example.demo.repository.UserAccountRepository;
-import com.example.demo.security.JwtUtil;
 import com.example.demo.service.AuthService;
+import org.springframework.stereotype.Service;
 
-import java.util.Map;
-
+@Service
 public class AuthServiceImpl implements AuthService {
 
-    private final UserAccountRepository userRepo;
-    private final JwtUtil jwtUtil;
-
-    public AuthServiceImpl(UserAccountRepository userRepo, JwtUtil jwtUtil) {
-        this.userRepo = userRepo;
-        this.jwtUtil = jwtUtil;
-    }
-
     @Override
-    public void register(RegisterRequestDto dto) {
-
-        if (userRepo.findByEmail(dto.getEmail()).isPresent()) {
-            throw new BadRequestException("Email already exists");
+    public String authenticate(String apiKey) {
+        // TEMP logic — replace later
+        if (apiKey == null || apiKey.isBlank()) {
+            throw new RuntimeException("API key is missing");
         }
-
-        UserAccount user = new UserAccount();
-        user.setEmail(dto.getEmail());
-        user.setPassword(dto.getPassword());
-        user.setRole(dto.getRole());
-
-        userRepo.save(user);
-    }
-
-    @Override
-    public AuthResponseDto login(AuthRequestDto dto) {
-
-        UserAccount user = userRepo.findByEmail(dto.getEmail())
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        String token = jwtUtil.generateToken(Map.of(), user.getEmail());
-        return new AuthResponseDto(token);
+        return "Authenticated with key: " + apiKey;
     }
 }
