@@ -15,6 +15,4 @@ public class UserAccount {
 
     @Column(nullable = false)
     private String password;
-
-    // getters & setters
 }
