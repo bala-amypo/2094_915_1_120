@@ -24,10 +24,6 @@
     </properties>
 
     <dependencies>
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-security</artifactId>
-</dependency>
 
 <dependency>
     <groupId>org.projectlombok</groupId>
@@ -132,13 +128,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
-
-                <dependencies>
-                    <dependency>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-starter-security</artifactId>
-                        <version>3.3.4</version>
-                    </dependency>
 
                     <dependency>
                         <groupId>org.apache.maven.surefire</groupId>
