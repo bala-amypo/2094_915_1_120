@@ -3,9 +3,9 @@ package com.example.demo.service.impl;
 import com.example.demo.entity.KeyExemption;
 import com.example.demo.repository.KeyExemptionRepository;
 import com.example.demo.service.KeyExemptionService;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
-
+@Service
 public class KeyExemptionServiceImpl implements KeyExemptionService {
 
     private final KeyExemptionRepository repository;
@@ -15,22 +15,27 @@ public class KeyExemptionServiceImpl implements KeyExemptionService {
     }
 
     @Override
-    public KeyExemption createExemption(KeyExemption exemption) {
+    public boolean isExempted(String apiKey) {
+        return repository.findByApiKey(apiKey)
+                .map(KeyExemption::isExempted)
+                .orElse(false);
+    }
+
+    @Override
+    public KeyExemption exemptKey(String apiKey) {
+        KeyExemption exemption = repository.findByApiKey(apiKey)
+                .orElseGet(() -> {
+                    KeyExemption ke = new KeyExemption();
+                    ke.setApiKey(apiKey);
+                    return ke;
+                });
+
+        exemption.setExempted(true);
         return repository.save(exemption);
     }
 
     @Override
-    public KeyExemption getExemptionByKey(Long apiKeyId) {
-        return repository.findAll()
-                .stream()
-                .filter(e -> e.getApiKey() != null &&
-                             e.getApiKey().getId().equals(apiKeyId))
-                .findFirst()
-                .orElse(null);
-    }
-
-    // ❗ NO @Override here (not in interface)
-    public List<KeyExemption> getAllExemptions() {
-        return repository.findAll();
+    public void removeExemption(String apiKey) {
+        repository.findByApiKey(apiKey).ifPresent(repository::delete);
     }
 }
