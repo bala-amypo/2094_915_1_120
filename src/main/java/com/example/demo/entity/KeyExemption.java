@@ -10,31 +10,25 @@ public class KeyExemption {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String apiKey;
+    @OneToOne
+    @JoinColumn(name = "api_key_id", nullable = false, unique = true)
+    private ApiKey apiKey;
 
-    @Column(nullable = false)
-    private boolean exempted;
-
-    public KeyExemption() {}
+    private boolean exempted = true;
 
     public Long getId() {
         return id;
     }
 
-    public String getApiKey() {
+    public ApiKey getApiKey() {
         return apiKey;
     }
 
-    public void setApiKey(String apiKey) {
+    public void setApiKey(ApiKey apiKey) {
         this.apiKey = apiKey;
     }
 
     public boolean isExempted() {
         return exempted;
-    }
-
-    public void setExempted(boolean exempted) {
-        this.exempted = exempted;
     }
 }
